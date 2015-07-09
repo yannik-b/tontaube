@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <dos.h>
-#include <mywait.h>
+#include "head/mywait.h"
 
 #if __linux__
 #include "conio_linux.h"
