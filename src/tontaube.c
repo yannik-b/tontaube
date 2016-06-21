@@ -1,3 +1,19 @@
+/*
+Copyright 2015 Yannik Buerkle
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <dos.h>
@@ -22,7 +38,7 @@
 // [Globale Variablen]
 int pos_fk_x, pos_fk_y;    			   		// Position des Fadenkreuzes
 int pos_tt_x, pos_tt_y;				   		// Aktuelle Position der Tontaube
-int ofs_x=4, ofs_y=3, siz_x=74, siz_y=21; 	// Größe und Position des Spielfeldes
+int ofs_x=4, ofs_y=3, siz_x=74, siz_y=21; 	// Grï¿½ï¿½e und Position des Spielfeldes
 int level=1, schuesse=7;
 
 // [Funktionsprototypen]
@@ -39,7 +55,7 @@ void schreibeSpielMeldung(char*, char*);
 
 
 /**
- * Setzt die Positionen von Fadenkreuz und Tontaube nach einer Runde zurück
+ * Setzt die Positionen von Fadenkreuz und Tontaube nach einer Runde zurï¿½ck
  */
 void resetParameter() {
 	pos_fk_x = 4;	// Position des Fadenkreuzes
@@ -65,9 +81,9 @@ void resetBildschirm() {
 }
 
 /**
- * Bewegt das Fadenkreuz, wenn W/A/S/D gedrückt
- * <p>Wenn SPACE gedrückt, führe feuern() aus</p> 
- * @return boolean Bewegung durchgeführt / Taste gedrückt
+ * Bewegt das Fadenkreuz, wenn W/A/S/D gedrï¿½ckt
+ * <p>Wenn SPACE gedrï¿½ckt, fï¿½hre feuern() aus</p>
+ * @return boolean Bewegung durchgefï¿½hrt / Taste gedrï¿½ckt
  */
 int bewegeFadenkreuz() {
 	int done = FALSE;
@@ -75,7 +91,7 @@ int bewegeFadenkreuz() {
     	done = TRUE;
 		switch (getch()) {
 			case KEY_FIRE:
-				done = feuern() / -1;  // Bei -1 wird zum nächsten Level gewechselt
+				done = feuern() / -1;  // Bei -1 wird zum nï¿½chsten Level gewechselt
 				break;
 			case KEY_UP:
 				if (pos_fk_y > 2) pos_fk_y--;
@@ -99,7 +115,7 @@ int bewegeFadenkreuz() {
 		}
 	}
 	return done;
-	
+
 }
 
 /**
@@ -131,17 +147,17 @@ void zeichneTontaube() {
 }
 
 /**
- * Zeichnet den Rahmen für das Spielfeld
+ * Zeichnet den Rahmen fï¿½r das Spielfeld
  * @return boolean TRUE
  */
 void zeichneBildschirm() {
 	int i;
-	char s[2]="°"; // Zeichen für die Rahmendarstellung
-	// Horizontale Linie über Spielfeld zeichnen
+	char s[2]="ï¿½"; // Zeichen fï¿½r die Rahmendarstellung
+	// Horizontale Linie ï¿½ber Spielfeld zeichnen
 	gotoxy(ofs_x-1, ofs_y-1);
 	for (i=0; i <= siz_x+1; i++) {
 		printf(s);
-	}         
+	}
 	// Horizontale Linie unter Spielfeld zeichnen
 	gotoxy(ofs_x-1, ofs_y+siz_y);
 	for (i=0; i <= siz_x+1; i++) {
@@ -154,10 +170,10 @@ void zeichneBildschirm() {
 		gotoxy(ofs_x+siz_x, ofs_y+i);
 		printf(s);
 	}
-}                 
+}
 
 /**
- * Bewegt die Tontaube zufällig auf dem Bildschirm
+ * Bewegt die Tontaube zufï¿½llig auf dem Bildschirm
  * @return boolean TRUE
  */
 void bewegeTontaube() {
@@ -173,17 +189,17 @@ void bewegeTontaube() {
 }
 
 /**
- * Prüft auf Position von Tontaube und Fadenkreuz
+ * Prï¿½ft auf Position von Tontaube und Fadenkreuz
  * @return boolean getroffen
  */
 int feuern() {
 	int getroffen = FALSE;
-    // Variablen für Schleife auf Minimalwerte setzen
+    // Variablen fï¿½r Schleife auf Minimalwerte setzen
 	int fx, fy, t;
-	// Schleife für Fadenkreuzpunkte
+	// Schleife fï¿½r Fadenkreuzpunkte
 	for (fx=-2; fx<=2; fx++) {
 		for (fy=-1; fy<=1; fy++) {
-			// Alle Positionen der Tontaube berücksichtigen
+			// Alle Positionen der Tontaube berï¿½cksichtigen
 			for (t=-1; t<=1; t++) {
 				if ((pos_fk_x + fx) == (pos_tt_x + t) && (pos_fk_y + fy) == pos_tt_y) {
 					getroffen = TRUE;
@@ -198,7 +214,7 @@ int feuern() {
 
 void schreibeMeldung() {
 	gotoxy(1,1);
-	printf("Level %2i von 10 | noch %1i Schüsse übrig", level, schuesse);
+	printf("Level %2i von 10 | noch %1i Schï¿½sse ï¿½brig", level, schuesse);
 }
 
 void schreibeSpielMeldung(char* headline, char* text) {
@@ -224,7 +240,7 @@ void schreibeSpielMeldung(char* headline, char* text) {
 }
 
 void main() {
-	schreibeSpielMeldung("WILLKOMMEN", "Drücke Enter um zu starten");
+	schreibeSpielMeldung("WILLKOMMEN", "Drï¿½cke Enter um zu starten");
 	int play=TRUE; // Wenn Level erfolglos beendet, wird diese auf FALSE gesetzt => Spiel endet
 	int durchlauf;
 	// einzelne Levels
@@ -237,19 +253,19 @@ void main() {
 		schreibeMeldung();
         while (schuesse > 0 && schuesse < 100) {
 			mywait(1);
-			if(durchlauf == 10) {   // Alle 10 Durchläufe Tontaube bewegen
+			if(durchlauf == 10) {   // Alle 10 Durchlï¿½ufe Tontaube bewegen
 				bewegeTontaube();
         	    durchlauf = 1;
 			}
 			if (bewegeFadenkreuz() == -1) {
-				// Wenn Taube getroffen, setze schuesse auf 999 um nächstes Level zu erreichen
+				// Wenn Taube getroffen, setze schuesse auf 999 um nï¿½chstes Level zu erreichen
                 schuesse=999;
 			}
 			durchlauf++;
 		}
 		if (schuesse==0) {
 			play=FALSE;
-            schreibeSpielMeldung("GAME OVER", "Du hast die Taube nicht mit deinen 7 Schüssen getroffen");
+            schreibeSpielMeldung("GAME OVER", "Du hast die Taube nicht mit deinen 7 Schï¿½ssen getroffen");
 		}
 		else {
 			schuesse=7;
@@ -257,6 +273,6 @@ void main() {
         }
 	}
     if (play) {
-		schreibeSpielMeldung("HERZLICHEN GLÜCKWUNSCH", "Du hast Tontauben-Schießen durchgespielt");
+		schreibeSpielMeldung("HERZLICHEN GLï¿½CKWUNSCH", "Du hast Tontauben-Schieï¿½en durchgespielt");
     }
 }
